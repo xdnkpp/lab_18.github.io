@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab-18</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Abril Fatface', serif;
+      margin: 50px;
+      text-align: center;
+      background-color:rgb(187, 223, 255)
+    }
+
+    h1 {
+      color: #333;
+      font-size: 60px;
+    }
+
+    div {
+      margin-bottom: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333;
+      padding: 8px 12px;
+      border: 1px solid #333;
+      border-radius: 4px;
+      margin-right: 10px;
+      background-color: #fff;
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #eee;
+    }
+
+    .active {
+      color: red;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      padding-left: 43.5%;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    li {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 5px;
+      border-radius: 4px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      width: 200px; 
+    }
+
+    li:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Online Books-Shop</h1>
+
+  <div>
+    <a href="#" onclick="sortBooks('asc')">Price ↑</a>
+    <a href="#" onclick="sortBooks('desc')">Price ↓</a>
+  </div>
+
+  <ul id="bookList">
+    <li data-price="30">asfhoa  -  30$</li>
+    <li data-price="20">hjdjrg  -  20$</li>
+    <li data-price="40">sdfjho  -  40$</li>
+  </ul>
+
+  <script>
+   
+    function sortBooks(order) {
+      const bookList = document.getElementById('bookList');
+      const booksArray = Array.from(bookList.getElementsByTagName('li'));
+      const sortedBooks = booksArray.sort((a, b) => {
+        const priceA = parseInt(a.getAttribute('data-price'));
+        const priceB = parseInt(b.getAttribute('data-price'));
+        return order === 'asc' ? priceA - priceB : priceB - priceA;
+      });
+      bookList.innerHTML = '';
+      sortedBooks.forEach(book => {
+        bookList.appendChild(book);
+      });
+      const activeLink = document.querySelector('.active');
+      if (activeLink) {
+        activeLink.classList.remove('active');
+      }
+      event.target.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
+
